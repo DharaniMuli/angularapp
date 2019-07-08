@@ -38,13 +38,18 @@ export class AppComponent implements OnInit {
     this.getItem();
   }
   addItem = () => {
+    if(this.item.Description == this.itemlist.Description){
+      console.log("Item already exists")
+    }
     this.http.post(`${this.uri}`, this.item).subscribe(data => {
+
       this.getItem()
       this.itemlist.push(this.item);
       this.item = {
         Description: '',
         Cost: ''
       };
+
       console.log('After Backend call', +data);
     });
   }
