@@ -18,15 +18,17 @@
       <button class="btn btn-success" (click)="addItem()">Add Item</button>
     </div>
   </form>
+
   <div class="search-hero col-lg-6">
     <input class="form-control glyphicon" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Start searching for an item of your choice!!">
-
   </div>
   <br>
+
   <div class="col-lg-6">
     <table class="table table-bordered">
       <thead>
       <tr>
+        <th>Item ID</th>
         <th>Item Description</th>
         <th>Item Cost($)</th>
         <th>Edit Item</th>
@@ -34,18 +36,40 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let item of itemlist | filter:searchText">
+      <tr *ngFor="let item of itemlist | filter:searchText; let i = index">
+        <td>{{i}}</td>
+        <td>{{item._id}}</td>
         <td>{{item.Description}}</td>
         <td>{{item.Cost}}</td>
         <td>
-          <button class="btn btn-sm btn-primary" (click)="editItem(itemlist._id)">Edit</button>
+          <button class="btn btn-sm btn-primary"  data-toggle="modal" data-target="#exampleModal">Edit</button>
         </td>
         <td>
-          <button class="btn btn-sm btn-danger" (click)="deleteItem()">Delete</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteItem(item._id,i)">Delete</button>
         </td>
 
       </tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

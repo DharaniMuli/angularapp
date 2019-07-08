@@ -10,15 +10,15 @@ import { HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http'
 })
 export class AppComponent implements OnInit {
   title = 'Our Store App';
-  // uri = 'http://localhost:4000/items/add';
-  uri = 'http://storeappbackend.herokuapp.com/items/add';
-  // geturi = 'http://localhost:4000/items/find'
-  geturi = 'https://storeappbackend.herokuapp.com/items/find'
+  uri = 'http://localhost:4000/items/add';
+  // uri = 'http://storeappbackend.herokuapp.com/items/add';
+  geturi = 'http://localhost:4000/items/find'
+  // geturi = 'https://storeappbackend.herokuapp.com/items/find'
 
   edituri = 'http://localhost:4000/items/edit';
   // uri = 'http://storeappbackend.herokuapp.com/items/edit';
 
-  deluri = 'http://localhost:4000/items/edit';
+  deluri = 'http://localhost:4000/items/delete';
   // uri = 'http://storeappbackend.herokuapp.com/items/edit';
 
 
@@ -26,6 +26,10 @@ export class AppComponent implements OnInit {
     Description: '',
     Cost: ''
   };
+
+  itemid = {
+    id :''
+  }
   searchText;
   public itemlist;
 
@@ -35,6 +39,7 @@ export class AppComponent implements OnInit {
   }
   addItem = () => {
     this.http.post(`${this.uri}`, this.item).subscribe(data => {
+      this.getItem()
       this.itemlist.push(this.item);
       this.item = {
         Description: '',
@@ -50,14 +55,33 @@ export class AppComponent implements OnInit {
       return this.itemlist;
     });
 
-    // editItem = () => {
-    //   this.http.post(`${this.edituri}`, this.item).subscribe(data => {
-    //     this.itemlist.push(this.item);
-    //     this.item = {
-    //       Description: '',
-    //       Cost: ''
-    //     };
-    //     console.log('After Backend call', +data);
-    //   });
+  }
+  editItem = (id) => {
+    this.http.post(`${this.edituri}`, this.item).subscribe(data => {
+      this.itemlist.push(this.item);
+      this.item = {
+        Description: '',
+        Cost: ''
+      };
+      console.log('After Backend call', +data);
+    });
+  }
+
+  deleteItem = (itemid, i) => {
+    console.log(itemid);
+    this.itemid ={
+      id : itemid
+    }
+
+    const index: number = this.itemlist.indexOf(itemid);
+    console.log(index)
+    if (index !== -1) {
+      this.itemlist.splice(index, 1);
+    }
+    this.http.post(`${this.deluri}`, this.itemid).subscribe(data =>{
+
+      this.itemlist.splice(i, 1);
+      console.log(data);
+    })
   }
 }
