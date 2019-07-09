@@ -10,16 +10,19 @@ import { HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http'
 })
 export class AppComponent implements OnInit {
   title = 'Our Store App';
-  uri = 'http://localhost:4000/items/add';
-  // uri = 'http://storeappbackend.herokuapp.com/items/add';
-  geturi = 'http://localhost:4000/items/find'
-  // geturi = 'https://storeappbackend.herokuapp.com/items/find'
 
-  edituri = 'http://localhost:4000/items/edit';
-  // uri = 'http://storeappbackend.herokuapp.com/items/edit';
+  // Local urls
+  // adduri = 'http://localhost:4000/items/add';
+  // geturi = 'http://localhost:4000/items/find';
+  // edituri = 'http://localhost:4000/items/edit';
+  // deluri = 'http://localhost:4000/items/delete';
 
-  deluri = 'http://localhost:4000/items/delete';
-  // uri = 'http://storeappbackend.herokuapp.com/items/edit';
+  // Global urls
+
+  adduri = 'http://storeappbackend.herokuapp.com/items/add';
+  geturi = 'https://storeappbackend.herokuapp.com/items/find'
+  edituri = 'http://storeappbackend.herokuapp.com/items/edit';
+  deluri = 'http://storeappbackend.herokuapp.com/items/delete';
 
 
   item = {
@@ -41,7 +44,7 @@ export class AppComponent implements OnInit {
     if(this.item.Description == this.itemlist.Description){
       console.log("Item already exists")
     }
-    this.http.post(`${this.uri}`, this.item).subscribe(data => {
+    this.http.post(`${this.adduri}`, this.item).subscribe(data => {
 
       this.getItem()
       this.itemlist.push(this.item);
