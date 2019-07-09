@@ -19,10 +19,10 @@ export class AppComponent implements OnInit {
 
   // Global urls
 
-  adduri = 'http://storeappbackend.herokuapp.com/items/add';
+  adduri = 'https://storeappbackend.herokuapp.com/items/add';
   geturi = 'https://storeappbackend.herokuapp.com/items/find'
-  edituri = 'http://storeappbackend.herokuapp.com/items/edit';
-  deluri = 'http://storeappbackend.herokuapp.com/items/delete';
+  edituri = 'https://storeappbackend.herokuapp.com/items/edit';
+  deluri = 'https://storeappbackend.herokuapp.com/items/delete';
 
 
   item = {
