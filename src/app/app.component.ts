@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
+import {NgModel} from '@angular/forms';
 
 
 @Component({
